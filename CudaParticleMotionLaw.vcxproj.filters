@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CudaCompile Include="src\kernel.cu" />
+    <CudaCompile Include="src\CudaParticleManager.cu" />
+    <CudaCompile Include="src\CudaParticleManager.cuh" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Source.cpp" />
+    <ClCompile Include="src\CameraController.cpp" />
+    <ClCompile Include="src\MovingWindow.cpp" />
+    <ClCompile Include="src\ResourceManager.cpp" />
+    <ClCompile Include="src\RNGGenerator.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\CameraController.h" />
+    <ClInclude Include="src\MovingWindow.h" />
+    <ClInclude Include="src\ResourceManager.h" />
+    <ClInclude Include="src\RNGGenerator.h" />
+    <ClInclude Include="src\Simulation.h" />
+    <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\CudaError.h" />
+    <ClInclude Include="src\HelperString.h" />
+  </ItemGroup>
+</Project>
