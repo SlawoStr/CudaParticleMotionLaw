@@ -5,15 +5,30 @@
 #include <math.h>
 #define PI 3.14159265
 
+/// <summary>
+/// Calculate signum
+/// </summary>
+/// <param name="val">Value</param>
+/// <returns>Signum of value</returns>
 template <typename T> __host__ __device__ int sgn(T val) {
 	return (T(0) < val) - (val < T(0));
 }
 
+/// <summary>
+/// Transfer radians to degrees
+/// </summary>
+/// <param name="a">Radians</param>
+/// <returns>Degrees</returns>
 inline __host__ __device__ float degree(float a)
 {
 	return static_cast<float>(a * (180 / PI));
 }
 
+/// <summary>
+/// Transfer degree to radians
+/// </summary>
+/// <param name="a"></param>
+/// <returns></returns>
 inline __host__ __device__ float radians(float a)
 {
 	return static_cast<float>(0.017453292 * a);
@@ -42,6 +57,7 @@ __host__ __device__ bool isRight(float2 a, float2 b, float2 c)
 	return((b.x - a.x) * (c.y - a.y) - (b.y - a.y) * (c.x - a.x)) > 0;
 }
 
+////////////////////////////////////////////////////////////
 __global__ void updateAgents(Particles* particles, float particleSpeed, float alpha, float beta, float reactionRadius,float2 simulationBound, int taskSize)
 {
 	for (int i = blockIdx.x * blockDim.x + threadIdx.x; i < taskSize; i += blockDim.x * gridDim.x)
@@ -88,6 +104,7 @@ __global__ void updateAgents(Particles* particles, float particleSpeed, float al
 	}
 }
 
+////////////////////////////////////////////////////////////
 __global__ void updatePos(Particles* particles,int taskSize)
 {
 	for (int i = blockIdx.x * blockDim.x + threadIdx.x; i < taskSize; i += blockDim.x * gridDim.x)
@@ -96,13 +113,14 @@ __global__ void updatePos(Particles* particles,int taskSize)
 	}
 }
 
-
+////////////////////////////////////////////////////////////
 CudaParticleManager::CudaParticleManager(float particleSpeed, float alpha, float beta, float reactRadius, float2 simulationBound, int cpuThreadNumber, int blockNumber, int threadPerBlock)
 	: m_particleSpeed{ particleSpeed }, m_alpha{ radians(alpha) }, m_beta{ radians(beta) }, m_reactionRadius{ reactRadius }, m_simulationBound{ simulationBound }, 
 	m_cpuThreadNumber{ cpuThreadNumber }, m_blockNumber{ blockNumber },m_threadPerBlock{threadPerBlock}
 {
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::draw(sf::RenderWindow& window)
 {
 	sf::CircleShape shape;
@@ -143,6 +161,7 @@ void CudaParticleManager::draw(sf::RenderWindow& window)
 	}
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::spawnCells(sf::Vector2f position, int cellNumber)
 {
 	Particles particle{};
@@ -158,6 +177,7 @@ void CudaParticleManager::spawnCells(sf::Vector2f position, int cellNumber)
 	checkCudaErrors(cudaMemcpy(thrust::raw_pointer_cast(m_gpuParticles.data()) + gpuSize, m_cpuParticles.data() + gpuSize, sizeof(Particles) * cellNumber, cudaMemcpyHostToDevice));
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::update()
 {
 	if (m_cpuMode)
@@ -220,6 +240,7 @@ void CudaParticleManager::update()
 	}
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::reduceSimulationBound()
 {
 	m_simulationBound.x -= 1;
@@ -239,17 +260,20 @@ void CudaParticleManager::reduceSimulationBound()
 	checkCudaErrors(cudaMemcpy(thrust::raw_pointer_cast(m_gpuParticles.data()), m_cpuParticles.data(), sizeof(Particles) * m_cpuParticles.size(), cudaMemcpyHostToDevice));
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::increaseSimulationBound()
 {
 	m_simulationBound.x += 1;
 	m_simulationBound.y += 1;
 }
 
+////////////////////////////////////////////////////////////
 float2 CudaParticleManager::getSimulationBound() const
 {
 	return m_simulationBound;
 }
 
+////////////////////////////////////////////////////////////
 void CudaParticleManager::changeMode()
 {
 	if (m_cpuMode == true)

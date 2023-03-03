@@ -3,6 +3,9 @@
 #include <thrust/device_vector.h>
 #include "cuda_runtime.h"
 
+/// <summary>
+/// Particle representation
+/// </summary>
 struct Particles
 {
 	float2		 position;
@@ -32,15 +35,15 @@ public:
 	void changeMode();
 
 private:
-	std::vector<Particles>				m_cpuParticles;
-	thrust::device_vector<Particles>	m_gpuParticles;
-	float								m_particleSpeed;
-	float								m_alpha;
-	float								m_beta;
-	float								m_reactionRadius;
-	float2								m_simulationBound;
-	int									m_cpuThreadNumber;
-	int									m_blockNumber;
-	int									m_threadPerBlock;
-	bool								m_cpuMode{ true };
+	std::vector<Particles>				m_cpuParticles;			//!< Particles vector
+	thrust::device_vector<Particles>	m_gpuParticles;			//!< Particles vector on GPU
+	float								m_particleSpeed;		//!< Particle speed
+	float								m_alpha;				//!< Alpha degree
+	float								m_beta;					//!< Beta degree
+	float								m_reactionRadius;		//!< Reaction radius
+	float2								m_simulationBound;		//!< Simulation bound
+	int									m_cpuThreadNumber;		//!< Maximum number of cpu threads
+	int									m_blockNumber;			//!< Number of blocks (GPU)
+	int									m_threadPerBlock;		//!< Number of threads per block (GPU)
+	bool								m_cpuMode{ true };		//!< Update mode GPU or CPU
 };
