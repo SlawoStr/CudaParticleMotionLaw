@@ -12,4 +12,4 @@ Scroll - Zomming
 
 Simulation controlls, CPU and GPU thread controlls and simulation bounds are set by config file in Resources   
 
-![Animation](https://github.com/SlawoStr/ParticalMotionLaw/blob/master/Animation.gif)
+![Animation](https://github.com/SlawoStr/CudaParticleMotionLaw/blob/master/Animation.gif)
