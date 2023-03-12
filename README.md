@@ -1,5 +1,7 @@
 # CudaParticleMotionLaw
 
+Particle Motion Law Simulation enhanced with gpu acceleration.    
+
 Based on "How life emerges from a simple particle motion law: Introducing the Primordial Particle System"    
 
 Controls:   
