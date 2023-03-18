@@ -42,7 +42,7 @@ inline __host__ __device__ float radians(float a)
 /// <returns>Distance between points</returns>
 __host__ __device__ float getDistance(float2 fp, float2 sp)
 {
-	return static_cast<float>(sqrt(pow(sp.x - fp.x, 2) + pow(sp.y - fp.y, 2)));
+	return static_cast<float>(sqrtf(powf(sp.x - fp.x, 2) + powf(sp.y - fp.y, 2)));
 }
 
 /// <summary>
@@ -114,9 +114,9 @@ __global__ void updatePos(Particles* particles,int taskSize)
 }
 
 ////////////////////////////////////////////////////////////
-CudaParticleManager::CudaParticleManager(float particleSpeed, float alpha, float beta, float reactRadius, float2 simulationBound, int cpuThreadNumber, int blockNumber, int threadPerBlock)
-	: m_particleSpeed{ particleSpeed }, m_alpha{ radians(alpha) }, m_beta{ radians(beta) }, m_reactionRadius{ reactRadius }, m_simulationBound{ simulationBound }, 
-	m_cpuThreadNumber{ cpuThreadNumber }, m_blockNumber{ blockNumber },m_threadPerBlock{threadPerBlock}
+CudaParticleManager::CudaParticleManager(float particleSpeed, float alpha, float beta, float reactRadius, float2 simulationBound, int cpuThreadNumber, int threadPerBlock)
+	: m_particleSpeed{ particleSpeed }, m_alpha{ radians(alpha) }, m_beta{ radians(beta) }, m_reactionRadius{ reactRadius }, m_simulationBound{ simulationBound },
+	m_cpuThreadNumber{ cpuThreadNumber }, m_threadPerBlock{ threadPerBlock }
 {
 }
 
@@ -234,8 +234,9 @@ void CudaParticleManager::update()
 	}
 	else
 	{
-		updateAgents << <m_blockNumber, m_threadPerBlock >> > (thrust::raw_pointer_cast(m_gpuParticles.data()), m_particleSpeed, m_alpha, m_beta, m_reactionRadius, m_simulationBound, static_cast<int>(m_gpuParticles.size()));
-		updatePos << <m_blockNumber, m_threadPerBlock >> > (thrust::raw_pointer_cast(m_gpuParticles.data()), static_cast<int>(m_gpuParticles.size()));
+		int blockNumber = (static_cast<int>(m_gpuParticles.size()) + m_threadPerBlock - 1) / m_threadPerBlock;
+		updateAgents << <blockNumber, m_threadPerBlock >> > (thrust::raw_pointer_cast(m_gpuParticles.data()), m_particleSpeed, m_alpha, m_beta, m_reactionRadius, m_simulationBound, static_cast<int>(m_gpuParticles.size()));
+		updatePos << <blockNumber, m_threadPerBlock >> > (thrust::raw_pointer_cast(m_gpuParticles.data()), static_cast<int>(m_gpuParticles.size()));
 		checkCudaErrors(cudaMemcpy(m_cpuParticles.data(), thrust::raw_pointer_cast(m_gpuParticles.data()), sizeof(Particles) * m_cpuParticles.size(), cudaMemcpyDeviceToHost));
 	}
 }

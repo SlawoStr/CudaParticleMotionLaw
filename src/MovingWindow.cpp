@@ -17,9 +17,8 @@ MovingWindow::MovingWindow(unsigned windowWidth, unsigned windowHeight, std::str
 	float reactRadius = resourceManager.getFloat("ReactRadius");
 	float2 simulationBound = { resourceManager.getFloat("BoundX"),resourceManager.getFloat("BoundY") };
 	int threadNumber = resourceManager.getInt("ThreadNumber");
-	int blockNumber = resourceManager.getInt("BlockNumber");
 	int threadPerBlock = resourceManager.getInt("ThreadPerBlock");
-	m_manager = CudaParticleManager(particleSpeed, alpha, beta, reactRadius, simulationBound, threadNumber, blockNumber, threadPerBlock);
+	m_manager = CudaParticleManager(particleSpeed, alpha, beta, reactRadius, simulationBound, threadNumber, threadPerBlock);
 
 	m_background.setFillColor(sf::Color::White);
 	m_background.setPosition(sf::Vector2f{ 0.0f,0.0f });
