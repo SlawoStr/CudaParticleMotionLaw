@@ -42,7 +42,7 @@ void MovingWindow::run()
 		pollEvent();
 		t.stop();
 		double elapsedTime = t.measure();
-		std::cout << "Frame time: " << elapsedTime << std::endl;
+		std::cout << "Frame time: " << elapsedTime * 1000 << std::endl;
 	}
 }
 
@@ -93,7 +93,7 @@ void MovingWindow::pollEvent()
 			{
 				if (e.key.code == sf::Mouse::Button::Left)
 				{
-					m_manager.spawnCells(m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window)), 690);
+					m_manager.spawnCells(m_window.mapPixelToCoords(sf::Mouse::getPosition(m_window)), 500);
 				}
 			}
 		}

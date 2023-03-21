@@ -14,5 +14,5 @@ ReactRadius = 5.0
 BoundX = 100.0
 BoundY = 100.0
 -- Other
-ThreadNumber = 10
-ThreadPerBlock = 512
+ThreadNumber = 20
+ThreadPerBlock = 128
