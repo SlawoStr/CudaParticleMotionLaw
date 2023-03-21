@@ -21,6 +21,8 @@ Parameters of simulation can be changed via configuration files in resources fol
 
 # Peformance
 
+
+
 # Visualisation
 
 Configuration 1   
