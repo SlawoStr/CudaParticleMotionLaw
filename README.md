@@ -22,8 +22,8 @@ Parameters of simulation can be changed via configuration files in resources fol
 # Visualisation
 
 Configuration 1
-![Animation](https://github.com/SlawoStr/ParticalMotionLaw/blob/master/Animation.gif)
+![Animation](https://github.com/SlawoStr/CudaParticleMotionLaw/blob/master/img/Animation.gif)
 
 Configuration 2
 
-![Animation](https://github.com/SlawoStr/ParticalMotionLaw/blob/master/Animation.gif)
+![Animation](https://github.com/SlawoStr/CudaParticleMotionLaw/blob/master/img/Animation2.gif)
