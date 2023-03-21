@@ -14,6 +14,7 @@ Based on "How life emerges from a simple particle motion law: Introducing the Pr
 |**P**|Pause/Unpause|  
 |**Arrow Up/Down**|Change simulation bounds|  
 |**Mouse Left button**|Spawn group of particles(hard coded 690)|  
+|**M**|	Switch between CPU/GPU|  
 
 # Settings
 
