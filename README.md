@@ -22,7 +22,7 @@ Parameters of simulation can be changed via configuration files in resources fol
 
 # Peformance
 
-|Processor Type \ Agent Number|2000|5000|10000|  
+|Processor Type \ Particle Number|2000|5000|10000|  
 |---|---|---|---|
 |**CPU**|8ms|45ms|175ms|  
 |**GPU**|3ms|7ms|13ms|  
