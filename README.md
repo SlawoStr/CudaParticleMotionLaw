@@ -19,6 +19,8 @@ Based on "How life emerges from a simple particle motion law: Introducing the Pr
 
 Parameters of simulation can be changed via configuration files in resources folder.
 
+# Peformance
+
 # Visualisation
 
 Configuration 1   
