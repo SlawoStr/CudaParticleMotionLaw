@@ -23,6 +23,7 @@ Parameters of simulation can be changed via configuration files in resources fol
 # Peformance
 
 O(n^2) Collision detection optimization can easily increase performance of both methods.   
+GPU particle structure memory misalignment fix can improve performance.    
 
 |Processor Type \ Particle Number|2000|5000|10000|  
 |---|---|---|---|
